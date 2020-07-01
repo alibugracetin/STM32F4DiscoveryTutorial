@@ -1,0 +1,8 @@
+RemoteSystemsTempFiles/*
+.metadata/*
+.settings/*
+*Startup
+*.ld
+*.launch
+*.xml
+*.s
