@@ -1,12 +1,11 @@
 /**
-  ******************************************************************************
-  *
-  *Created 01.07.2020
-  *Created by alibugracetin
-  *
-  ******************************************************************************
-*/
-
+ ******************************************************************************
+ *
+ *Created 01.07.2020
+ *Created by alibugracetin
+ *
+ ******************************************************************************
+ */
 
 /*
  *	Base adress of AHB1_Rcc = 0x40023800
@@ -39,20 +38,19 @@
 
 #define DelayTime  100000
 
-int main(void)
-{
+int main(void) {
 
 	//constant pointer pointing to uint32_t variable. Const pointer shouldn't point another adress
-	uint32_t  volatile *const RCC_AHB1_Enable 	 = (uint32_t *)(0x40023830);
-	uint32_t  volatile *const GPIOD_Mode_Reg   	 = (uint32_t *)(0x40020C00);
-	uint32_t  volatile *const GPIOD_Output_Reg   = (uint32_t *)(0x40020C14);
+	uint32_t volatile *const RCC_AHB1_Enable = (uint32_t*) (0x40023830);
+	uint32_t volatile *const GPIOD_Mode_Reg = (uint32_t*) (0x40020C00);
+	uint32_t volatile *const GPIOD_Output_Reg = (uint32_t*) (0x40020C14);
 
-	uint32_t volatile *const GPIOA_Mode_Reg		 = (uint32_t *)(0x40020000);
-	uint32_t volatile *const GPIOA_Pull_Up_Down  = (uint32_t *)(0x4002000C);
-	uint32_t volatile *const GPIOA_Input		 = (uint32_t *)(0x40020010);
+	uint32_t volatile *const GPIOA_Mode_Reg = (uint32_t*) (0x40020000);
+	uint32_t volatile *const GPIOA_Pull_Up_Down = (uint32_t*) (0x4002000C);
+	uint32_t volatile *const GPIOA_Input = (uint32_t*) (0x40020010);
 
-	*RCC_AHB1_Enable |= (1 << 0) ; //RCC Enable for GPIOA
-	*RCC_AHB1_Enable |= (1 << 3) ; //RCC Enable for GPIOD
+	*RCC_AHB1_Enable |= (1 << 0); //RCC Enable for GPIOA
+	*RCC_AHB1_Enable |= (1 << 3); //RCC Enable for GPIOD
 	//shift left three times and  masking
 
 	*GPIOD_Mode_Reg &= (~(3 << 24));
@@ -65,16 +63,12 @@ int main(void)
 	*GPIOA_Pull_Up_Down &= (~(3 << 0));
 	*GPIOA_Pull_Up_Down |= (0 << 1);
 
+	while (1) {
+		uint8_t input = (uint8_t) (*GPIOA_Input & 0x1);
 
-	while (1)
-	{
-		uint8_t input = (uint8_t)(*GPIOA_Input & 0x1);
-
-		if(input == 0)
-		{
+		if (input == 0) {
 			*GPIOD_Output_Reg = (1 << 12);
-		}
-		else
+		} else
 			*GPIOD_Output_Reg = (0 << 12);
 	}
 

@@ -23,24 +23,24 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-002-Led_Toggle_BitOperation.elf \
+005-Led_Toggle_BitFields.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-002-Led_Toggle_BitOperation.list \
+005-Led_Toggle_BitFields.list \
 
 OBJCOPY_BIN += \
-002-Led_Toggle_BitOperation.bin \
+005-Led_Toggle_BitFields.bin \
 
 
 # All Target
-all: 002-Led_Toggle_BitOperation.elf secondary-outputs
+all: 005-Led_Toggle_BitFields.elf secondary-outputs
 
 # Tool invocations
-002-Led_Toggle_BitOperation.elf: $(OBJS) $(USER_OBJS) C:\Calismalar\STM32F4Discovery_Tutorial\002-Led_Toggle_BitOperation\STM32F407VGTX_FLASH.ld
-	arm-none-eabi-gcc -o "002-Led_Toggle_BitOperation.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Calismalar\STM32F4Discovery_Tutorial\002-Led_Toggle_BitOperation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="002-Led_Toggle_BitOperation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+005-Led_Toggle_BitFields.elf: $(OBJS) $(USER_OBJS) C:\Calismalar\STM32F4_Discovery_Tutorial\005-Led_Toggle_BitFields\STM32F407VGTX_FLASH.ld
+	arm-none-eabi-gcc -o "005-Led_Toggle_BitFields.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Calismalar\STM32F4_Discovery_Tutorial\005-Led_Toggle_BitFields\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="005-Led_Toggle_BitFields.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -49,13 +49,13 @@ default.size.stdout: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-002-Led_Toggle_BitOperation.list: $(EXECUTABLES)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "002-Led_Toggle_BitOperation.list"
+005-Led_Toggle_BitFields.list: $(EXECUTABLES)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "005-Led_Toggle_BitFields.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-002-Led_Toggle_BitOperation.bin: $(EXECUTABLES)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "002-Led_Toggle_BitOperation.bin"
+005-Led_Toggle_BitFields.bin: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "005-Led_Toggle_BitFields.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
